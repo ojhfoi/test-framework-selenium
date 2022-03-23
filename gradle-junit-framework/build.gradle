@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+apply plugin: "java"
+apply plugin: "java-library"
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.1.1'
+
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.0.3'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+
+    testImplementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.17.3'
+
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
+    implementation group: 'org.aeonbits.owner', name: 'owner', version: '1.0.11'
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
