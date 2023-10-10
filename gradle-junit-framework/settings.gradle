@@ -1,0 +1,2 @@
+rootProject.name = 'ojhfoi-junit-base'
+include 'ojhfoi-junit-web'
