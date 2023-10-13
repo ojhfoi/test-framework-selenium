@@ -26,9 +26,15 @@ public class DriverCreator extends DriversHelper {
 
                 return new ChromeDriver(chOptions);
             case "firefox":
+                String width = WebHelpers.init().getDriverConfig().browserSize()
+                                .split("x")[0];
+                String height = WebHelpers.init().getDriverConfig().browserSize()
+                        .split("x")[1];
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions ffOptions = new FirefoxOptions();
                 ffOptions.addArguments("--private-window");
+                ffOptions.addArguments("--width=" + width);
+                ffOptions.addArguments("--height=" + height);
                 return new FirefoxDriver(ffOptions);
             default:
                 return null;

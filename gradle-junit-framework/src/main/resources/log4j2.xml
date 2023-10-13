@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="debug" strict="true"
+<Configuration status="info" strict="true"
                name="XMLConfigTest" packages="org.apache.logging.log4j.test">
     <Filter type="ThresholdFilter" level="trace"/>
 
     <Appenders>
         <Console name="STDOUT">
             <Layout type="PatternLayout" pattern="%m %n"/>
-            <RegexFilter regex=".*Decoding WebSocket Frame.*" onMatch="DENY" onMismatch="NEUTRAL"/>
-            <RegexFilter regex=".*Encoding WebSocket Frame opCode.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+            <RegexFilter regex=".*Decoding WebSocket Frame.*" onMatch="DENY" onMismatch="NEUTRAL" ignoreExceptions="false"/>
+            <RegexFilter regex=".*Encoding WebSocket Frame opCode.*" onMatch="DENY" onMismatch="NEUTRAL" ignoreExceptions="false"/>
         </Console>
-        <RollingFile name="rollingFile"
-                     fileName="target/logs/log4j2.log"
-                     filePattern="target/logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
-            <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
-            </PatternLayout>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy
-                        size="250 MB"/>
-            </Policies>
-        </RollingFile>
+<!--        <RollingFile name="rollingFile"-->
+<!--                     fileName="target/logs/log4j2.log"-->
+<!--                     filePattern="target/logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">-->
+<!--            <PatternLayout>-->
+<!--                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy interval="1"/>-->
+<!--                <SizeBasedTriggeringPolicy-->
+<!--                        size="250 MB"/>-->
+<!--            </Policies>-->
+<!--        </RollingFile>-->
     </Appenders>
 
 
     <Loggers>
         <Root level="INFO">
             <AppenderRef ref="STDOUT"/>
-            <AppenderRef ref="rollingFile"/>
+<!--            <AppenderRef ref="rollingFile"/>-->
         </Root>
     </Loggers>
 
