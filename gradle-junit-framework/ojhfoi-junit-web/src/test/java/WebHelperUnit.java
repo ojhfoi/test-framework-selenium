@@ -8,16 +8,14 @@ public class WebHelperUnit {
     @DisplayName("Create Web Driver with Default params")
     @Test
     public void createDeafultDriver () {
-        System.setProperty("browser.config", "");
         WebHelpers.init().tearUp();
         Assertions.assertNotNull(WebHelpers.init().getInstanceDriver());
         WebHelpers.init().tearDown();
     }
 
     @DisplayName("Create Firefox Driver from properties file")
-    @Test
+    @ojhfoi.core.customExtensions.Test(browserConfig = "firefoxLocal")
     public void createFirefoxDriver () {
-        System.setProperty("browser.config", "firefoxLocal");
         WebHelpers.init().tearUp();
         Assertions.assertNotNull(WebHelpers.init().getInstanceDriver());
         WebHelpers.init().tearDown();

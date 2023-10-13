@@ -1,36 +1,14 @@
-//plugins {
-//    id 'java'
-//}
-//
-//java {
-//    toolchain {
-//        languageVersion = JavaLanguageVersion.of(11)
-//    }
-//}
-
 apply plugin: "java"
 apply plugin: "java-library"
 apply {
     rootProject
 }
-//group 'org.example'
-//version '1.0-SNAPSHOT'
-//
+
 repositories {
     mavenLocal()
     mavenCentral()
 }
-//
-//subprojects {
-//    dependencies {
-//        compile project.rootProject
-//    }
-//}
 
 dependencies {
     implementation project.rootProject
 }
-
-//test {
-//    systemProperty('junit.jupiter.execution.parallel.enabled', 'true')
-//}

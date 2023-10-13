@@ -11,7 +11,7 @@ public class TestDataUnits {
     @Test
     @DisplayName("Check default test data")
     public void checkDefaultTestData () {
-        System.setProperty("testData.config", "");
+        ConfigFactory.setProperty("testData.config", "");
         TestdataConfig tdConf = ConfigFactory.create(TestdataConfig.class);
         Assertions.assertAll( "Check empty testData Config",
                 () -> {Assertions.assertNull(tdConf.projectUrl(), "Check projectUrl");},
@@ -23,8 +23,8 @@ public class TestDataUnits {
     @Test
     @DisplayName("Check test data from file")
     public void checkTestDataFromFile () {
-        System.setProperty("testData.config", "testDataConfig");
-        TestdataConfig tdConf = ConfigFactory.create(TestdataConfig.class, System.getProperties());
+        ConfigFactory.setProperty("testData.config", "testDataConfig");
+        TestdataConfig tdConf = ConfigFactory.create(TestdataConfig.class);
         Assertions.assertAll( "Check empty testData Config",
                 () -> {Assertions.assertEquals("https://myTestProject.org", tdConf.projectUrl(), "Check projectUrl");},
                 () -> {Assertions.assertEquals("testLogin", tdConf.login(), "Check login");},

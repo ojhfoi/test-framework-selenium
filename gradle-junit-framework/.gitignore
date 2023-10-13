@@ -25,3 +25,6 @@ allure-results
 .gradle
 target
 gradle
+*/build
+*/target
+*/allure-results

@@ -3,6 +3,7 @@ package unitTests;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import ojhfoi.core.configs.driversConfig.DriverConfig;
 import ojhfoi.core.configs.driversConfig.DriversHelper;
+import ojhfoi.core.helpers.HelperUtils;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -17,9 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DriverUnits extends DriversHelper {
+    
+    private HelperUtils helperUtils;
 
     @Override
     public <T> Object createDriver() {
+        DriverConfig config = ConfigFactory.create(DriverConfig.class);
         switch (config.browserName()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
@@ -45,7 +49,7 @@ public class DriverUnits extends DriversHelper {
     @Test
     @DisplayName("Check default driver config")
     public void testDefaultDriverConfig() {
-        System.setProperty("browser.config", "");
+        DriverConfig config = ConfigFactory.create(DriverConfig.class);
         assertAll( "Drivers Configuration check",
                 () -> {Assertions.assertNotNull(config.browserName(), "Check browser name field");},
                 () -> {Assertions.assertNotNull(config.browserSize(), "Check browser size field");},
@@ -57,37 +61,36 @@ public class DriverUnits extends DriversHelper {
     @Test
     @DisplayName("Check driver config loaded from file")
     public void testDriverConfigsFromFile () {
-        System.setProperty("browser.config", "config");
-        config = ConfigFactory.create(DriverConfig.class, System.getProperties());
+        ConfigFactory.setProperty("browser.config", "config");
+        DriverConfig config = ConfigFactory.create(DriverConfig.class);
         assertAll( "Drivers Configuration check",
                 () -> {Assertions.assertEquals("chrome1", config.browserName(), "Check browser name field");},
                 () -> {Assertions.assertEquals("1024x780", config.browserSize(), "Check browser size field");},
                 () -> {Assertions.assertNull(config.url(), "Check browser url field");},
                 () -> {assertNull(config.browserVersion(), "Check browser version field");}
         );
+        ConfigFactory.setProperty("browser.config", "");
     }
 
     @Test
     @DisplayName("Check chrome driver startup")
     @Disabled
     public void testChromeDriver () {
-        System.setProperty("browser.config", "chromeLocal");
-        config = ConfigFactory.create(DriverConfig.class, System.getProperties());
+        ConfigFactory.setProperty("browser.config", "chromeLocal");
         ChromeDriver driver = (ChromeDriver) createDriver();
         Assertions.assertNotNull(driver);
         driver.quit();
-        System.setProperty("browser.config", "");
+        ConfigFactory.setProperty("browser.config", "");
     }
 
     @Test
     @DisplayName("Check firefox driver startup")
     public void testFirefoxDriver () {
-        System.setProperty("browser.config", "firefoxLocal");
-        config = ConfigFactory.create(DriverConfig.class, System.getProperties());
+        ConfigFactory.setProperty("browser.config", "firefoxLocal");
         FirefoxDriver driver = (FirefoxDriver) createDriver();
         Assertions.assertNotNull(driver);
         driver.quit();
-        System.setProperty("browser.config", "");
+        ConfigFactory.setProperty("browser.config", "");
     }
 
 }
