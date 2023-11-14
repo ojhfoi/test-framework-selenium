@@ -6,6 +6,7 @@ import org.aeonbits.owner.Reloadable;
 @Config.LoadPolicy(Config.LoadType.FIRST)
 @Config.Sources({
         "file:${user.dir}/src/main/resources/browserConfigs/${browser.config}.properties",
+        "file:${user.dir}/src/main/resources/${browser.config}.properties",
 //        "system:browser.config"
 })
 public interface DriverConfig extends Config,Reloadable {
@@ -23,4 +24,6 @@ public interface DriverConfig extends Config,Reloadable {
     @Key("browser.headless")
     @DefaultValue("false")
     boolean headless ();
+    @Key("apk.path")
+    String apkPath();
 }

@@ -39,4 +39,8 @@ repositories {
 
 dependencies {
     implementation project.rootProject
+
+    //Appium implementation group: 'io.appium', name: 'java-client', version: '8.5.1'
+    implementation(group: 'io.appium', name: 'java-client', version: '8.5.1')
+//    testImplementation(group: 'io.appium', name: 'java-client', version: '8.5.1')
 }
