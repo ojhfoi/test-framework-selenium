@@ -1,0 +1,11 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'ojhfoi-junit-base'
+include 'ojhfoi-junit-web'
+include 'exampleWebTest'
