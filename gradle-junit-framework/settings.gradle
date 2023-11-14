@@ -1,2 +1,3 @@
 rootProject.name = 'ojhfoi-junit-base'
 include 'ojhfoi-junit-web'
+include 'ojhfoi-junit-mobile'

@@ -1,15 +1,17 @@
-package ojhfoi.coreWeb.webHelpers;
+package ojhfoi.summerMobile.mobileHelpers;
 
+import io.qameta.allure.Step;
 import ojhfoi.core.configs.driversConfig.DriverConfig;
 import ojhfoi.core.customExtensions.Test;
 import ojhfoi.core.helpers.HelperUtils;
-import ojhfoi.coreWeb.webDrivers.DriverCreator;
+import ojhfoi.summerMobile.mobileDrivers.DriverCreator;
 import org.aeonbits.owner.ConfigFactory;
 
-public class WebHelpers extends HelperUtils {
+import java.io.FileOutputStream;
 
-    private static volatile WebHelpers instance;
-    private static Object mutex = new Object();
+public class MobileHelper extends HelperUtils {
+    private static volatile MobileHelper instance;
+    private static final Object mutex = new Object();
 
     private static final ThreadLocal<HelperStorage> holder = new ThreadLocal<HelperStorage> () {
 
@@ -19,11 +21,8 @@ public class WebHelpers extends HelperUtils {
         }
     };
 
-    private WebHelpers () {
-    }
-
-    public static synchronized WebHelpers init () {
-        WebHelpers result = holder.get().getHelpers();
+    public static synchronized MobileHelper init () {
+        MobileHelper result = holder.get().getHelpers();
         Class[] ca = new SecurityManager() {
             public Class[] getClassContext () {
                 return super.getClassContext();
@@ -34,7 +33,7 @@ public class WebHelpers extends HelperUtils {
                 result = instance;
                 if (result == null) {
                     String callerMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-                    result = new WebHelpers();
+                    result = new MobileHelper();
                     result.driverHelper = new DriverCreator();
                     result.configName = getAnnotationValue(ca, callerMethod);
                     ConfigFactory.setProperty("browser.config", result.configName);
@@ -58,15 +57,17 @@ public class WebHelpers extends HelperUtils {
         return value;
     }
 
+    @Step("Create instance driver")
     @Override
     public void tearUp() {
         init().getInstanceDriver();
     }
 
+    @Step("Close instance driver")
     @Override
     public void tearDown() {
-        if (getInstanceDriver() != null) {
-            getInstanceDriver().quit();
+        if (init().getInstanceDriver() != null) {
+            init().getInstanceDriver().quit();
             driver = null;
         }
     }
