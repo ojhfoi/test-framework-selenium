@@ -5,7 +5,7 @@ on:
     branches: $CI_PIPELINE_SOURCE
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch
+  workflow_dispatch:
 
 permissions:
   contents: read
