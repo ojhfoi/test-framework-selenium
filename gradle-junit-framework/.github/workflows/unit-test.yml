@@ -1,11 +1,10 @@
 name: Java CI with Gradle
 
 on:
-  push:
-    branches: $CI_PIPELINE_SOURCE
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Runs"]
+    types:
+      - request
 
 permissions:
   contents: read
