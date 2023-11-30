@@ -2,7 +2,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: $CI_PIPELIEN_SOURCE
+    branches: $CI_PIPELINE_SOURCE
   pull_request:
     branches: [ "main" ]
 
