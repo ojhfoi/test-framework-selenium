@@ -24,4 +24,4 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.10.0 
       - name: Run Gradle build
-        run: ./gradle-junit-framework/gradlew
+        run: ./gradle-junit-framework/gradlew build
