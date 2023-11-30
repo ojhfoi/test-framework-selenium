@@ -1,0 +1,11 @@
+name: Runs
+
+on:
+  push:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+  
+jobs:
+  call-workflow-gradle-junit:
+    uses: test-framework-selenium/gradle-junit-framework/.github/workflows/unit-test.yml
