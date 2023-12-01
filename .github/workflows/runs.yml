@@ -34,8 +34,12 @@ jobs:
       - name: Run Gradle build
         run: ./gradle-junit-framework/gradlew build -c ./gradle-junit-framework/settings.gradle
 
-      - name: Test Report
-        uses: dorny/test-reporter@v1
+      - name: Test marketplace action
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
         with:
-          name: test-result
-          path: ./gradle-junit-framework/build/reports/tests/test/index.html
+          allure_results: ./build/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
