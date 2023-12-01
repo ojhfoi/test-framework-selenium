@@ -1,16 +1,16 @@
-package ojhfoi.coreWeb.webHelpers;
+package ojhfoi.summerWeb.webHelpers;
 
 import ojhfoi.core.configs.driversConfig.DriverConfig;
 import ojhfoi.core.configs.testsConfig.TestdataConfig;
 import ojhfoi.core.customExtensions.Test;
 import ojhfoi.core.helpers.HelperUtils;
-import ojhfoi.coreWeb.webDrivers.DriverCreator;
+import ojhfoi.summerWeb.webDrivers.DriverCreator;
 import org.aeonbits.owner.ConfigFactory;
 
-public class WebHelpers extends HelperUtils {
+public class WebHelper extends HelperUtils {
 
-    private static volatile WebHelpers instance;
-    private static Object mutex = new Object();
+//    private static volatile WebHelper instance;
+    private static final Object mutex = new Object();
 
     private static final ThreadLocal<HelperStorage> holder = new ThreadLocal<HelperStorage> () {
 
@@ -20,22 +20,20 @@ public class WebHelpers extends HelperUtils {
         }
     };
 
-    private WebHelpers () {
-    }
 
-    public static synchronized WebHelpers init () {
-        WebHelpers result = holder.get().getHelpers();
-        Class[] ca = new SecurityManager() {
+    public static synchronized WebHelper init () {
+        WebHelper result = holder.get().getHelpers();
+        var ca = new SecurityManager() {
             public Class[] getClassContext () {
                 return super.getClassContext();
             }
         }.getClassContext();
         if (result == null) {
             synchronized (mutex) {
-                result = instance;
+                result = holder.get().getHelpers();
                 if (result == null) {
                     String callerMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-                    result = new WebHelpers();
+                    result = new WebHelper();
                     result.driverHelper = new DriverCreator();
                     result.configName = getAnnotationBrowserConfigValue(ca, callerMethod);
                     result.testDataConfigName = getAnnotationTestDataConfigValue(ca, callerMethod);

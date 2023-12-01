@@ -1,7 +1,7 @@
 package ojhfoi.webTests.PageObject;
 
 import io.qameta.allure.Step;
-import ojhfoi.coreWeb.webHelpers.WebHelpers;
+import ojhfoi.summerWeb.webHelpers.WebHelper;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
@@ -18,7 +18,7 @@ public class ArticlePage extends BasePage {
 
     @Step("Check is expeceted article title {expectedTitle} equals actual title")
     public void checkArticleTitle (String expectedTitle) {
-        FluentWait<RemoteWebDriver> wait = new FluentWait<>(WebHelpers.init().getInstanceDriver())
+        FluentWait<RemoteWebDriver> wait = new FluentWait<>(WebHelper.init().getInstanceDriver())
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(ElementClickInterceptedException.class);

@@ -11,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 public class DriverCreator extends DriversHelper {
 
     @Override
-    public synchronized  <T> Object createDriver() {
+    public synchronized Object createDriver() {
         switch (WebHelper.init().getDriverConfig().browserName()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
@@ -27,9 +27,9 @@ public class DriverCreator extends DriversHelper {
 
                 return new ChromeDriver(chOptions);
             case "firefox":
-                String width = WebHelpers.init().getDriverConfig().browserSize()
+                String width = WebHelper.init().getDriverConfig().browserSize()
                                 .split("x")[0];
-                String height = WebHelpers.init().getDriverConfig().browserSize()
+                String height = WebHelper.init().getDriverConfig().browserSize()
                         .split("x")[1];
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions ffOptions = new FirefoxOptions();

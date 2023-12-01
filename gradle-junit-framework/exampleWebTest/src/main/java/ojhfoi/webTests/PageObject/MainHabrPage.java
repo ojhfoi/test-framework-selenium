@@ -1,7 +1,7 @@
 package ojhfoi.webTests.PageObject;
 
 import io.qameta.allure.Step;
-import ojhfoi.coreWeb.webHelpers.WebHelpers;
+import ojhfoi.summerWeb.webHelpers.WebHelper;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -12,7 +12,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import java.security.Key;
 import java.time.Duration;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class MainHabrPage extends BasePage {
         headerElements.stream().filter(
                 webElement -> webElement.getText().contains(blockName)
         ).findFirst().ifPresentOrElse(
-                (webElement) -> {webElement.click();},
+                WebElement::click,
                 () -> {throw new AssertionError("Not found element with name: "
                         + blockName);}
         );
@@ -45,14 +44,14 @@ public class MainHabrPage extends BasePage {
     @Step("Open article by number {articleCount}")
     public void openArticles (int articleCount) {
         Assertions.assertNotEquals(0, articlesList.size());
-        articlesList.get(0)
+        articlesList.get(articleCount)
                 .findElement(By.xpath("//a[@class='tm-title__link']"))
                 .click();
     }
 
     @Step("Get article title by number {articleCount}")
     public String getArticleTitle (int articleCount) {
-        FluentWait<RemoteWebDriver> wait = new FluentWait<>(WebHelpers.init().getInstanceDriver())
+        FluentWait<RemoteWebDriver> wait = new FluentWait<>(WebHelper.init().getInstanceDriver())
                 .withTimeout(Duration.ofSeconds(30))
                         .pollingEvery(Duration.ofMillis(500))
                                 .ignoring(ElementClickInterceptedException.class);
@@ -68,7 +67,7 @@ public class MainHabrPage extends BasePage {
 
     @Step("Check article title {articleTitle} is equals actual article title by num {articleCount}")
     public void checkArticleTitle (int articleCount, String articleTitle) {
-        FluentWait<RemoteWebDriver> wait = new FluentWait<>(WebHelpers.init().getInstanceDriver())
+        FluentWait<RemoteWebDriver> wait = new FluentWait<>(WebHelper.init().getInstanceDriver())
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(ElementClickInterceptedException.class);
@@ -83,7 +82,7 @@ public class MainHabrPage extends BasePage {
     @Step("Open search page and search article {articleName}")
     public void goToSearch (String articleName) {
         searchButton.click();
-        FluentWait<RemoteWebDriver> wait = new FluentWait<>(WebHelpers.init().getInstanceDriver())
+        FluentWait<RemoteWebDriver> wait = new FluentWait<>(WebHelper.init().getInstanceDriver())
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(ElementClickInterceptedException.class);

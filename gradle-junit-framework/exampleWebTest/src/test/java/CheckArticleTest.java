@@ -1,5 +1,5 @@
 import ojhfoi.core.customExtensions.Test;
-import ojhfoi.coreWeb.webHelpers.WebHelpers;
+import ojhfoi.summerWeb.webHelpers.WebHelper;
 import ojhfoi.webTests.PageObject.ArticlePage;
 import ojhfoi.webTests.PageObject.MainHabrPage;
 import org.junit.jupiter.api.DisplayName;
@@ -10,9 +10,9 @@ public class CheckArticleTest {
     @DisplayName("Check first article and check it title")
     public void checkArticleTest () {
         try {
-            WebHelpers.init().tearUp();
-            WebHelpers.init().navigateTo(WebHelpers.init().getTestData().projectUrl());
-            WebHelpers.init().checkCurrentUrl(WebHelpers.init().getTestData().projectUrl());
+            WebHelper.init().tearUp();
+            WebHelper.init().navigateTo(WebHelper.init().getTestData().projectUrl());
+            WebHelper.init().checkCurrentUrl(WebHelper.init().getTestData().projectUrl());
 
             MainHabrPage mainHabrPage = new MainHabrPage();
             mainHabrPage.openHeadersBlock("Разработка");
@@ -24,7 +24,7 @@ public class CheckArticleTest {
             ArticlePage articlePage = new ArticlePage();
             articlePage.checkArticleTitle(articleName);
         } finally {
-            WebHelpers.init().tearDown();
+            WebHelper.init().tearDown();
         }
     }
 
