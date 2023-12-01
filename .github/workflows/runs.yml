@@ -33,3 +33,9 @@ jobs:
         
       - name: Run Gradle build
         run: ./gradle-junit-framework/gradlew build -c ./gradle-junit-framework/settings.gradle
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        with:
+          name: test-result
+          path: ./gradle-junit-framework/build/reports/tests/test/index.html
