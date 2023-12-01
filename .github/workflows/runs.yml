@@ -21,7 +21,15 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+          
+      - name: Setup firefox
+        id: setup-firefox
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: 'latest'
+          
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.10.0 
+        
       - name: Run Gradle build
         run: ./gradle-junit-framework/gradlew build -c ./gradle-junit-framework/settings.gradle
