@@ -1,1 +1,0 @@
-./../allure-2.24.1/bin/allure serve ./allure-results

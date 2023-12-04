@@ -14,10 +14,7 @@ plugins {
     id('io.qameta.allure')
 }
 
-//apply plugin: 'java'
 apply plugin: 'io.qameta.allure'
-//apply plugin: 'java-library'
-//apply plugin: 'idea'
 apply {
     project.rootProject
 }
